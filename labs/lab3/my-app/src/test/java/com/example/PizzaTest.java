@@ -3,18 +3,25 @@ package com.example;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class PizzaTest {
 
     private PizzaFactory pizzaFactory;
     private PizzaStore pizzaStore;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
-    // Set up the factory and store before running tests
+
     @Before
     public void setUp() {
+        // Initialize the PizzaFactory and PizzaStore before each test
         pizzaFactory = new PizzaFactory();
         pizzaStore = new PizzaStore(pizzaFactory);
     }
+
+
 
     // Test creating a Cheese Pizza
     @Test
@@ -98,4 +105,43 @@ public class PizzaTest {
         pizza.cut();
         pizza.box();
     }
+    
+    @Test
+    public void testCheesePizza() {
+        System.setOut(new PrintStream(outContent));
+        Pizza pizza = pizzaStore.orderPizza("cheese");
+        assertTrue(pizza instanceof CheesePizza);
+        assertEquals("Preparing Cheese Pizza\nBaking Cheese Pizza\nCutting Cheese Pizza\nBoxing Cheese Pizza\n", outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
+    public void testGreekPizza() {
+        System.setOut(new PrintStream(outContent));
+        Pizza pizza = pizzaStore.orderPizza("greek");
+        assertTrue(pizza instanceof GreekPizza);
+        assertEquals("Preparing Greek Pizza\nBaking Greek Pizza\nCutting Greek Pizza\nBoxing Greek Pizza\n", outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
+    public void testPepperoniPizza() {
+        System.setOut(new PrintStream(outContent));
+        Pizza pizza = pizzaStore.orderPizza("pepperoni");
+        assertTrue(pizza instanceof PepperoniPizza);
+        assertEquals("Preparing Pepperoni Pizza\nBaking Pepperoni Pizza\nCutting Pepperoni Pizza\nBoxing Pepperoni Pizza\n", outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
+    public void testGlutenFreePizza() {
+        System.setOut(new PrintStream(outContent));
+        Pizza pizza = pizzaStore.orderPizza("glutenfree");
+        assertTrue(pizza instanceof GlutenFreePizza);
+        assertEquals("Preparing Gluten free Pizza\nBaking Gluten free Pizza\nCutting Gluten free Pizza\nBoxing Gluten free Pizza\n", outContent.toString());
+        System.setOut(originalOut);
+    }
+    
 }
+
+

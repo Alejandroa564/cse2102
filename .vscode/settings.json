@@ -1,3 +1,9 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.project.sourcePaths": [
+        "labs/lab1",
+        "j2024_09_03/src",
+        "j2024_09_03/prac",
+        "labs/lab3/my-app/src/main/java/com/example"
+    ]
 }
