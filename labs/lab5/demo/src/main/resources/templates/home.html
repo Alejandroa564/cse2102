@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Demo Application</h1>
+    <p>Select a feature to explore:</p>
+    <ul>
+        <li><a th:href="@{/quiz}">Quiz</a></li>
+        <li><a th:href="@{/password/evaluate}">Password Strength Evaluation</a></li>
+        <li><a th:href="@{/email/validate}">Email Validation</a></li>
+    </ul>
+</body>
+</html>
